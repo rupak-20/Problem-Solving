@@ -4,27 +4,15 @@ public:
         if(s.length() != t.length())
             return false;
         
-        unordered_map<char, char> m;
+        int m1[256] = {0}, m2[256] = {0}, n = s.length();
         
-        for(int i=0; i<s.length(); i++) {
-            // if the character has been mapped
-            if(m.find(s[i]) != m.end()) {
-                // if the character is mapped to a different t[i] return false
-                if(m[s[i]] != t[i])
-                    return false;
-            }
+        for(int i=0; i<n; i++) {
+            if(m1[s[i]] != m2[t[i]])
+                return false;
             
-            else
-                m[s[i]] = t[i];
+            m1[s[i]] = i+1;
+            m2[t[i]] = i+1;
         }
-        
-        set<char> done;
-        for(auto x : m)
-            done.insert(x.second);
-        
-        // if one character in s is mapped to multiple characters in t return false
-        if(done.size() != m.size())
-            return false;
         
         return true;
     }
